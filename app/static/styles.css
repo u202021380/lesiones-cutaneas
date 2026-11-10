@@ -1,0 +1,53 @@
+:root {
+  --fondo: #f6f7f9;
+  --tarjeta: #ffffff;
+  --texto: #1b1f24;
+  --suave: #5b6570;
+  --borde: #dde1e6;
+  --acento: #1f6feb;
+  --peligro: #b42318;
+  --aviso: #8a5a00;
+  --aviso-fondo: #fff4d6;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #111418; --tarjeta: #1a1f25; --texto: #e8ebee; --suave: #9aa4ae;
+    --borde: #2c333b; --acento: #5b9dff; --peligro: #ff7b72; --aviso: #ffd27a; --aviso-fondo: #3a2e10;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--fondo); color: var(--texto); }
+.barra { padding: 16px; border-bottom: 1px solid var(--borde); background: var(--tarjeta); }
+.barra h1 { margin: 0; font-size: 1.15rem; }
+.sub { margin: 2px 0 0; color: var(--suave); font-size: .9rem; }
+main { max-width: 640px; margin: 0 auto; padding: 16px; display: grid; gap: 16px; }
+.tarjeta { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 12px; padding: 16px; }
+h2 { margin: 0 0 12px; font-size: 1.05rem; }
+h3 { margin: 0; font-size: .95rem; }
+.guia-cab, .mapa-cab { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+.guia-cab h2 { margin: 0; }
+.guia-cuerpo { display: flex; gap: 16px; align-items: flex-start; }
+.ejemplo { width: 90px; flex: none; color: var(--suave); }
+.indicaciones { margin: 0; padding-left: 20px; font-size: .95rem; }
+.indicaciones li { margin-bottom: 6px; }
+.enlace { background: none; border: 0; color: var(--acento); cursor: pointer; font: inherit; padding: 4px 0; }
+.selector { display: block; border: 2px dashed var(--borde); border-radius: 10px; padding: 18px; text-align: center; cursor: pointer; color: var(--suave); }
+.selector input { display: block; margin: 0 auto 8px; max-width: 100%; }
+.vista { display: block; width: 100%; max-height: 420px; object-fit: contain; margin-top: 12px; border-radius: 8px; background: #000; }
+.primario { margin-top: 12px; width: 100%; padding: 12px; border: 0; border-radius: 10px; background: var(--acento); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+.primario:disabled { opacity: .5; cursor: default; }
+.error { color: var(--peligro); margin: 10px 0 0; }
+.banner { background: var(--aviso-fondo); color: var(--aviso); border-radius: 10px; padding: 10px 14px; font-weight: 600; }
+.advertencia { background: var(--aviso-fondo); color: var(--aviso); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; font-weight: 600; }
+.categoria { font-size: 1.25rem; font-weight: 700; margin: 0 0 4px; }
+.etiqueta { font-size: .8rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--borde); color: var(--suave); vertical-align: middle; }
+.barras { display: grid; gap: 6px; margin: 12px 0 16px; }
+.barra-fila { display: grid; grid-template-columns: 170px 1fr 52px; gap: 8px; align-items: center; font-size: .9rem; }
+.barra-pista { height: 10px; background: var(--borde); border-radius: 6px; overflow: hidden; }
+.barra-valor { height: 100%; background: var(--acento); }
+.aviso { font-size: .85rem; color: var(--suave); margin: 12px 0 4px; }
+.meta { font-size: .8rem; color: var(--suave); margin: 0; }
+@media (max-width: 480px) {
+  .guia-cuerpo { flex-direction: column; align-items: center; }
+  .barra-fila { grid-template-columns: 120px 1fr 48px; }
+}

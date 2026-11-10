@@ -1,0 +1,22 @@
+name: Pruebas
+on: [push, pull_request]
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements-dev.txt
+      - name: Análisis estático (DoD 2)
+        run: flake8 app training tests scripts
+      - name: Pruebas automatizadas y cobertura (DoD 3)
+        env:
+          USAR_MODELO_SIMULADO: "1"
+        run: pytest --cov=app --cov-report=term-missing --cov-fail-under=70 --junitxml=reporte-pruebas.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reporte-pruebas
+          path: reporte-pruebas.xml

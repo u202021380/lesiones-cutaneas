@@ -1,0 +1,5117 @@
+{
+  "metadata": {
+    "descripcion": "DATOS SINTÉTICOS DE PRUEBA. No corresponden a pacientes, profesionales ni atenciones reales del Centro de Salud San Fernando. Uso exclusivo para pruebas funcionales del Sprint 1.",
+    "version": "1.0",
+    "fecha_generacion": "2026-10-31",
+    "semilla": 20261031,
+    "endpoint": "POST /api/v1/evaluaciones (multipart/form-data, campo imagen)",
+    "reglas_contrato": [
+      "Formato JPG o PNG",
+      "Tamaño ≤ 10 MB (10 × 1024 × 1024 bytes)",
+      "Lado menor ≥ 224 px",
+      "Imagen legible (no dañada)"
+    ],
+    "supuestos": [
+      "Establecimiento MINSA categoría I-4 en Ate; horarios, turnos y número de profesionales son supuestos por confirmar con el PO real",
+      "Consulta externa de lunes a sábado; sin atención los domingos ni el 08/10/2026 (feriado)",
+      "Citas cada 20 minutos por profesional; ningún profesional atiende a dos pacientes a la vez",
+      "Cada foto válida se reemplaza por una imagen del conjunto de prueba de PAD-UFES-20 de la clase indicada en referencia.clase",
+      "MEL está sobrerrepresentado respecto de PAD-UFES-20 para probar más casos de cáncer",
+      "resultado_obtenido se completa al ejecutar la prueba; no se inventa la salida del modelo"
+    ],
+    "conteos": {
+      "profesionales": 5,
+      "pacientes": 50,
+      "lesiones": 55,
+      "atenciones": 80,
+      "solicitudes_api": 87,
+      "aceptadas": 71,
+      "rechazadas_422": 10,
+      "aceptadas_sin_control_de_calidad": 4,
+      "limite_aceptadas": 2,
+      "lote_rendimiento_CP09": 30,
+      "atenciones_por_clase": {
+        "ACK": 26,
+        "BCC": 24,
+        "SCC": 6,
+        "MEL": 4,
+        "NEV": 10,
+        "SEK": 10
+      }
+    },
+    "casos_no_cubiertos_por_estos_datos": [
+      "CP05 (imagen sintética con valores conocidos)",
+      "CP06 (partición por paciente de PAD-UFES-20)",
+      "CP07 (experimento con el conjunto de prueba)"
+    ]
+  },
+  "profesionales": [
+    {
+      "id": "PS-01",
+      "perfil": "Médico jefe del establecimiento",
+      "rol": "Consulta el historial y las evaluaciones; atiende en consulta externa",
+      "turno": "Mañana",
+      "horario": "07:00–13:00",
+      "dias": "Lunes a viernes"
+    },
+    {
+      "id": "PS-02",
+      "perfil": "Médico general",
+      "rol": "Registra casos y obtiene la evaluación preliminar",
+      "turno": "Mañana",
+      "horario": "07:00–13:00",
+      "dias": "Lunes a sábado"
+    },
+    {
+      "id": "PS-03",
+      "perfil": "Médico general",
+      "rol": "Registra casos y obtiene la evaluación preliminar",
+      "turno": "Tarde",
+      "horario": "13:00–19:00",
+      "dias": "Lunes a viernes"
+    },
+    {
+      "id": "PS-04",
+      "perfil": "Médico cirujano SERUMS",
+      "rol": "Registra casos y obtiene la evaluación preliminar",
+      "turno": "Tarde",
+      "horario": "13:00–19:00",
+      "dias": "Lunes a sábado"
+    },
+    {
+      "id": "PS-05",
+      "perfil": "Médico general (retén)",
+      "rol": "Cubre la consulta externa los sábados por la mañana",
+      "turno": "Mañana",
+      "horario": "07:00–13:00",
+      "dias": "Sábados"
+    }
+  ],
+  "pacientes": [
+    {
+      "id": "PAC-0001",
+      "sexo": "F",
+      "edad": 70,
+      "fototipo": "V",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0001-L1",
+          "clase": "BCC",
+          "localizacion": "Antebrazo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0002",
+      "sexo": "M",
+      "edad": 70,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0002-L1",
+          "clase": "ACK",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0003",
+      "sexo": "M",
+      "edad": 63,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0003-L1",
+          "clase": "BCC",
+          "localizacion": "Antebrazo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0004",
+      "sexo": "M",
+      "edad": 32,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0004-L1",
+          "clase": "NEV",
+          "localizacion": "Espalda"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0005",
+      "sexo": "F",
+      "edad": 20,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0005-L1",
+          "clase": "NEV",
+          "localizacion": "Espalda"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0006",
+      "sexo": "M",
+      "edad": 60,
+      "fototipo": "V",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0006-L1",
+          "clase": "BCC",
+          "localizacion": "Oreja"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0007",
+      "sexo": "F",
+      "edad": 77,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0007-L1",
+          "clase": "SCC",
+          "localizacion": "Cuero cabelludo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0008",
+      "sexo": "F",
+      "edad": 70,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0008-L1",
+          "clase": "ACK",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0009",
+      "sexo": "F",
+      "edad": 59,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0009-L1",
+          "clase": "ACK",
+          "localizacion": "Nariz"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0010",
+      "sexo": "F",
+      "edad": 62,
+      "fototipo": "IV",
+      "distrito": "Santa Anita",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0010-L1",
+          "clase": "ACK",
+          "localizacion": "Dorso de la mano"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0011",
+      "sexo": "M",
+      "edad": 50,
+      "fototipo": "II",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0011-L1",
+          "clase": "ACK",
+          "localizacion": "Nariz"
+        },
+        {
+          "lesion_id": "PAC-0011-L2",
+          "clase": "SEK",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0012",
+      "sexo": "F",
+      "edad": 32,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0012-L1",
+          "clase": "NEV",
+          "localizacion": "Abdomen"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0013",
+      "sexo": "M",
+      "edad": 67,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0013-L1",
+          "clase": "SEK",
+          "localizacion": "Cuello"
+        },
+        {
+          "lesion_id": "PAC-0013-L2",
+          "clase": "BCC",
+          "localizacion": "Antebrazo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0014",
+      "sexo": "M",
+      "edad": 59,
+      "fototipo": "IV",
+      "distrito": "Santa Anita",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0014-L1",
+          "clase": "SEK",
+          "localizacion": "Tórax"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0015",
+      "sexo": "M",
+      "edad": 74,
+      "fototipo": "V",
+      "distrito": "Santa Anita",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0015-L1",
+          "clase": "ACK",
+          "localizacion": "Cuello"
+        },
+        {
+          "lesion_id": "PAC-0015-L2",
+          "clase": "BCC",
+          "localizacion": "Cuello"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0016",
+      "sexo": "F",
+      "edad": 63,
+      "fototipo": "VI",
+      "distrito": "Ate",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0016-L1",
+          "clase": "SEK",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0017",
+      "sexo": "F",
+      "edad": 48,
+      "fototipo": "IV",
+      "distrito": "La Molina",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0017-L1",
+          "clase": "NEV",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0018",
+      "sexo": "M",
+      "edad": 68,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0018-L1",
+          "clase": "ACK",
+          "localizacion": "Oreja"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0019",
+      "sexo": "M",
+      "edad": 57,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0019-L1",
+          "clase": "ACK",
+          "localizacion": "Nariz"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0020",
+      "sexo": "F",
+      "edad": 82,
+      "fototipo": "III",
+      "distrito": "El Agustino",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0020-L1",
+          "clase": "SCC",
+          "localizacion": "Cuero cabelludo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0021",
+      "sexo": "F",
+      "edad": 55,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0021-L1",
+          "clase": "BCC",
+          "localizacion": "Cuero cabelludo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0022",
+      "sexo": "F",
+      "edad": 47,
+      "fototipo": "V",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0022-L1",
+          "clase": "BCC",
+          "localizacion": "Antebrazo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0023",
+      "sexo": "M",
+      "edad": 63,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0023-L1",
+          "clase": "BCC",
+          "localizacion": "Oreja"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0024",
+      "sexo": "M",
+      "edad": 57,
+      "fototipo": "II",
+      "distrito": "Santa Anita",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0024-L1",
+          "clase": "MEL",
+          "localizacion": "Pierna"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0025",
+      "sexo": "M",
+      "edad": 84,
+      "fototipo": "V",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0025-L1",
+          "clase": "BCC",
+          "localizacion": "Oreja"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0026",
+      "sexo": "M",
+      "edad": 60,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0026-L1",
+          "clase": "ACK",
+          "localizacion": "Dorso de la mano"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0027",
+      "sexo": "M",
+      "edad": 63,
+      "fototipo": "III",
+      "distrito": "La Molina",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0027-L1",
+          "clase": "BCC",
+          "localizacion": "Nariz"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0028",
+      "sexo": "F",
+      "edad": 38,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0028-L1",
+          "clase": "MEL",
+          "localizacion": "Planta del pie"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0029",
+      "sexo": "F",
+      "edad": 56,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0029-L1",
+          "clase": "SCC",
+          "localizacion": "Cuero cabelludo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0030",
+      "sexo": "F",
+      "edad": 69,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0030-L1",
+          "clase": "SEK",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0031",
+      "sexo": "M",
+      "edad": 63,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0031-L1",
+          "clase": "ACK",
+          "localizacion": "Dorso de la mano"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0032",
+      "sexo": "F",
+      "edad": 40,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0032-L1",
+          "clase": "NEV",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0033",
+      "sexo": "F",
+      "edad": 56,
+      "fototipo": "II",
+      "distrito": "Ate",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0033-L1",
+          "clase": "BCC",
+          "localizacion": "Oreja"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0034",
+      "sexo": "F",
+      "edad": 78,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0034-L1",
+          "clase": "SEK",
+          "localizacion": "Cuello"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0035",
+      "sexo": "F",
+      "edad": 85,
+      "fototipo": "V",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0035-L1",
+          "clase": "ACK",
+          "localizacion": "Rostro"
+        },
+        {
+          "lesion_id": "PAC-0035-L2",
+          "clase": "BCC",
+          "localizacion": "Nariz"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0036",
+      "sexo": "M",
+      "edad": 77,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0036-L1",
+          "clase": "SCC",
+          "localizacion": "Oreja"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0037",
+      "sexo": "M",
+      "edad": 61,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0037-L1",
+          "clase": "SEK",
+          "localizacion": "Espalda"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0038",
+      "sexo": "F",
+      "edad": 76,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0038-L1",
+          "clase": "BCC",
+          "localizacion": "Oreja"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0039",
+      "sexo": "M",
+      "edad": 59,
+      "fototipo": "V",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0039-L1",
+          "clase": "BCC",
+          "localizacion": "Tórax"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0040",
+      "sexo": "M",
+      "edad": 72,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0040-L1",
+          "clase": "BCC",
+          "localizacion": "Cuero cabelludo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0041",
+      "sexo": "F",
+      "edad": 40,
+      "fototipo": "V",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0041-L1",
+          "clase": "NEV",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0042",
+      "sexo": "F",
+      "edad": 80,
+      "fototipo": "III",
+      "distrito": "El Agustino",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0042-L1",
+          "clase": "MEL",
+          "localizacion": "Pierna"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0043",
+      "sexo": "F",
+      "edad": 63,
+      "fototipo": "III",
+      "distrito": "El Agustino",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0043-L1",
+          "clase": "BCC",
+          "localizacion": "Antebrazo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0044",
+      "sexo": "M",
+      "edad": 80,
+      "fototipo": "V",
+      "distrito": "Santa Anita",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0044-L1",
+          "clase": "BCC",
+          "localizacion": "Oreja"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0045",
+      "sexo": "M",
+      "edad": 22,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0045-L1",
+          "clase": "NEV",
+          "localizacion": "Rostro"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0046",
+      "sexo": "M",
+      "edad": 53,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0046-L1",
+          "clase": "BCC",
+          "localizacion": "Nariz"
+        },
+        {
+          "lesion_id": "PAC-0046-L2",
+          "clase": "ACK",
+          "localizacion": "Antebrazo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0047",
+      "sexo": "M",
+      "edad": 77,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0047-L1",
+          "clase": "ACK",
+          "localizacion": "Antebrazo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0048",
+      "sexo": "M",
+      "edad": 86,
+      "fototipo": "IV",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0048-L1",
+          "clase": "SCC",
+          "localizacion": "Cuero cabelludo"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0049",
+      "sexo": "F",
+      "edad": 72,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0049-L1",
+          "clase": "ACK",
+          "localizacion": "Nariz"
+        }
+      ]
+    },
+    {
+      "id": "PAC-0050",
+      "sexo": "F",
+      "edad": 51,
+      "fototipo": "III",
+      "distrito": "Ate",
+      "financiamiento": "SIS",
+      "lesiones": [
+        {
+          "lesion_id": "PAC-0050-L1",
+          "clase": "ACK",
+          "localizacion": "Nariz"
+        }
+      ]
+    }
+  ],
+  "atenciones": [
+    {
+      "atencion_id": "AT-0001",
+      "fecha": "2026-09-01",
+      "hora": "16:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0015",
+      "lesion_id": "PAC-0015-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Costra en zona expuesta al sol que no desaparece",
+      "localizacion_lesion": "Cuello",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0001",
+          "intento": 1,
+          "archivo": "AT-0001_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 5621925,
+          "peso_mb": 5.36,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0002",
+      "fecha": "2026-09-03",
+      "hora": "07:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0011",
+      "lesion_id": "PAC-0011-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión rugosa que reaparece",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0002",
+          "intento": 1,
+          "archivo": "AT-0002_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3474674,
+          "peso_mb": 3.31,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0003",
+      "fecha": "2026-09-03",
+      "hora": "15:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0002",
+      "lesion_id": "PAC-0002-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Mancha áspera y escamosa en zona expuesta al sol",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0003",
+          "intento": 1,
+          "archivo": "AT-0003_1.png",
+          "formato": "PNG",
+          "peso_bytes": 15518924,
+          "peso_mb": 14.8,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Inválida: tamaño",
+          "casos_prueba": [
+            "CP03"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "El archivo supera el tamaño máximo de 10 MB"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Captura de pantalla sin compresión"
+        },
+        {
+          "solicitud_id": "EV-0004",
+          "intento": 2,
+          "archivo": "AT-0003_2.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4246835,
+          "peso_mb": 4.05,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Reintento válido",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "El médico vuelve a tomar la foto en la misma atención"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0004",
+      "fecha": "2026-09-04",
+      "hora": "12:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0028",
+      "lesion_id": "PAC-0028-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lunar que cambió de tamaño y color",
+      "localizacion_lesion": "Planta del pie",
+      "referencia": {
+        "clase": "MEL",
+        "nombre": "Melanoma",
+        "grupo": "Cáncer",
+        "cie10": "C43.7",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0005",
+          "intento": 1,
+          "archivo": "AT-0004_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4394515,
+          "peso_mb": 4.19,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0005",
+      "fecha": "2026-09-04",
+      "hora": "13:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0007",
+      "lesion_id": "PAC-0007-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Nódulo con costra que duele al tocarlo",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "SCC",
+        "nombre": "Carcinoma epidermoide",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0006",
+          "intento": 1,
+          "archivo": "AT-0005_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4178178,
+          "peso_mb": 3.98,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0006",
+      "fecha": "2026-09-04",
+      "hora": "16:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0003",
+      "lesion_id": "PAC-0003-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Herida que no cierra desde hace meses",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.6",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0007",
+          "intento": 1,
+          "archivo": "AT-0006_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 6431858,
+          "peso_mb": 6.13,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0007",
+      "fecha": "2026-09-05",
+      "hora": "10:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-05",
+      "paciente_id": "PAC-0038",
+      "lesion_id": "PAC-0038-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.2",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0008",
+          "intento": 1,
+          "archivo": "AT-0007_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 1904571,
+          "peso_mb": 1.82,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0008",
+      "fecha": "2026-09-05",
+      "hora": "12:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-05",
+      "paciente_id": "PAC-0034",
+      "lesion_id": "PAC-0034-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Mancha oscura que parece pegada a la piel",
+      "localizacion_lesion": "Cuello",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0009",
+          "intento": 1,
+          "archivo": "AT-0008_1.png",
+          "formato": "PNG",
+          "peso_bytes": 5175493,
+          "peso_mb": 4.94,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0009",
+      "fecha": "2026-09-05",
+      "hora": "15:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0030",
+      "lesion_id": "PAC-0030-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión marrón de aspecto verrugoso",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0010",
+          "intento": 1,
+          "archivo": "AT-0009_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 5219302,
+          "peso_mb": 4.98,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0010",
+      "fecha": "2026-09-05",
+      "hora": "16:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0037",
+      "lesion_id": "PAC-0037-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Mancha oscura que parece pegada a la piel",
+      "localizacion_lesion": "Espalda",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0011",
+          "intento": 1,
+          "archivo": "AT-0010_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4616404,
+          "peso_mb": 4.4,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0011",
+      "fecha": "2026-09-05",
+      "hora": "17:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0012",
+      "lesion_id": "PAC-0012-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de lunar",
+      "localizacion_lesion": "Abdomen",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.5",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0012",
+          "intento": 1,
+          "archivo": "AT-0011_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3054127,
+          "peso_mb": 2.91,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0012",
+      "fecha": "2026-09-07",
+      "hora": "17:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0042",
+      "lesion_id": "PAC-0042-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lunar de bordes irregulares que crece",
+      "localizacion_lesion": "Pierna",
+      "referencia": {
+        "clase": "MEL",
+        "nombre": "Melanoma",
+        "grupo": "Cáncer",
+        "cie10": "C43.7",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0013",
+          "intento": 1,
+          "archivo": "AT-0012_1.png",
+          "formato": "PNG",
+          "peso_bytes": 0,
+          "peso_mb": 0.0,
+          "ancho_px": null,
+          "alto_px": null,
+          "tipo_caso": "Inválida: dañada",
+          "casos_prueba": [
+            "CP10 (propuesto: imagen dañada)"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "La imagen está dañada o no se puede leer"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Archivo vacío (0 bytes)"
+        }
+      ],
+      "observacion_po": "El médico no reintenta: el paciente se retira sin evaluación preliminar (la atención continúa con el flujo habitual)"
+    },
+    {
+      "atencion_id": "AT-0013",
+      "fecha": "2026-09-09",
+      "hora": "08:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0023",
+      "lesion_id": "PAC-0023-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Lesión perlada que no cicatriza",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.2",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0014",
+          "intento": 1,
+          "archivo": "AT-0013_1.png",
+          "formato": "PNG",
+          "peso_bytes": 363654,
+          "peso_mb": 0.35,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0014",
+      "fecha": "2026-09-09",
+      "hora": "10:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0022",
+      "lesion_id": "PAC-0022-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.6",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0015",
+          "intento": 1,
+          "archivo": "AT-0014_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4144998,
+          "peso_mb": 3.95,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Calidad: borrosa",
+          "casos_prueba": [
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada en el Sprint 1 (sin control de calidad)",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Foto tomada con poca luz y desenfocada. El contrato del Sprint 1 no la rechaza; debe rechazarse o advertirse cuando se implementen HU09 (control de calidad) y HU12 (baja confianza)"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0015",
+      "fecha": "2026-09-09",
+      "hora": "15:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0050",
+      "lesion_id": "PAC-0050-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Mancha áspera y escamosa en zona expuesta al sol",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0016",
+          "intento": 1,
+          "archivo": "AT-0015_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 720618,
+          "peso_mb": 0.69,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0016",
+      "fecha": "2026-09-10",
+      "hora": "08:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0005",
+      "lesion_id": "PAC-0005-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lunar que roza con la ropa",
+      "localizacion_lesion": "Espalda",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.5",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0017",
+          "intento": 1,
+          "archivo": "AT-0016_1.png",
+          "formato": "PNG",
+          "peso_bytes": 917905,
+          "peso_mb": 0.88,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0017",
+      "fecha": "2026-09-10",
+      "hora": "13:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0047",
+      "lesion_id": "PAC-0047-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Costra en zona expuesta al sol que no desaparece",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0018",
+          "intento": 1,
+          "archivo": "AT-0017_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3823575,
+          "peso_mb": 3.65,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0018",
+      "fecha": "2026-09-11",
+      "hora": "13:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0001",
+      "lesion_id": "PAC-0001-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Herida que no cierra desde hace meses",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.6",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0019",
+          "intento": 1,
+          "archivo": "AT-0018_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3291855,
+          "peso_mb": 3.14,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0019",
+      "fecha": "2026-09-12",
+      "hora": "08:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-05",
+      "paciente_id": "PAC-0010",
+      "lesion_id": "PAC-0010-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión rugosa que reaparece",
+      "localizacion_lesion": "Dorso de la mano",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0020",
+          "intento": 1,
+          "archivo": "AT-0019_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 5179710,
+          "peso_mb": 4.94,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Calidad: no corresponde a una lesión",
+          "casos_prueba": [
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada en el Sprint 1 (sin control de calidad)",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Foto de la receta médica en lugar de la lesión. El contrato del Sprint 1 no la rechaza; debe rechazarse o advertirse cuando se implementen HU09 (control de calidad) y HU12 (baja confianza)"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0020",
+      "fecha": "2026-09-12",
+      "hora": "10:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-05",
+      "paciente_id": "PAC-0009",
+      "lesion_id": "PAC-0009-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión rugosa que reaparece",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0021",
+          "intento": 1,
+          "archivo": "AT-0020_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 274923,
+          "peso_mb": 0.26,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0021",
+      "fecha": "2026-09-14",
+      "hora": "15:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0046",
+      "lesion_id": "PAC-0046-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Herida que no cierra desde hace meses",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0022",
+          "intento": 1,
+          "archivo": "AT-0021_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2324769,
+          "peso_mb": 2.22,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0022",
+      "fecha": "2026-09-15",
+      "hora": "16:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0044",
+      "lesion_id": "PAC-0044-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Herida que no cierra desde hace meses",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.2",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0023",
+          "intento": 1,
+          "archivo": "AT-0022_1.png",
+          "formato": "PNG",
+          "peso_bytes": 52428,
+          "peso_mb": 0.05,
+          "ancho_px": 200,
+          "alto_px": 150,
+          "tipo_caso": "Inválida: resolución",
+          "casos_prueba": [
+            "CP04"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "Resolución insuficiente: el lado menor debe medir al menos 224 px"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Miniatura recortada"
+        },
+        {
+          "solicitud_id": "EV-0024",
+          "intento": 2,
+          "archivo": "AT-0022_2.jpg",
+          "formato": "JPG",
+          "peso_bytes": 504066,
+          "peso_mb": 0.48,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Reintento válido",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "El médico vuelve a tomar la foto en la misma atención"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0023",
+      "fecha": "2026-09-15",
+      "hora": "17:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0036",
+      "lesion_id": "PAC-0036-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión costrosa que crece rápidamente",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "SCC",
+        "nombre": "Carcinoma epidermoide",
+        "grupo": "Cáncer",
+        "cie10": "C44.2",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0025",
+          "intento": 1,
+          "archivo": "AT-0023_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3244325,
+          "peso_mb": 3.09,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0024",
+      "fecha": "2026-09-16",
+      "hora": "09:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0033",
+      "lesion_id": "PAC-0033-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.2",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0026",
+          "intento": 1,
+          "archivo": "AT-0024_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4678265,
+          "peso_mb": 4.46,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0025",
+      "fecha": "2026-09-16",
+      "hora": "14:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0048",
+      "lesion_id": "PAC-0048-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Nódulo con costra que duele al tocarlo",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "SCC",
+        "nombre": "Carcinoma epidermoide",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0027",
+          "intento": 1,
+          "archivo": "AT-0025_1.png",
+          "formato": "PNG",
+          "peso_bytes": 6962525,
+          "peso_mb": 6.64,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0026",
+      "fecha": "2026-09-16",
+      "hora": "18:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0017",
+      "lesion_id": "PAC-0017-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de lunar",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0028",
+          "intento": 1,
+          "archivo": "AT-0026_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2320377,
+          "peso_mb": 2.21,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0027",
+      "fecha": "2026-09-17",
+      "hora": "09:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0049",
+      "lesion_id": "PAC-0049-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Costra en zona expuesta al sol que no desaparece",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0029",
+          "intento": 1,
+          "archivo": "AT-0027_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 587986,
+          "peso_mb": 0.56,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0028",
+      "fecha": "2026-09-17",
+      "hora": "11:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0046",
+      "lesion_id": "PAC-0046-L2",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión rugosa que reaparece",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0030",
+          "intento": 1,
+          "archivo": "AT-0028_1.png",
+          "formato": "PNG",
+          "peso_bytes": 7350185,
+          "peso_mb": 7.01,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0029",
+      "fecha": "2026-09-17",
+      "hora": "14:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0018",
+      "lesion_id": "PAC-0018-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Costra en zona expuesta al sol que no desaparece",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0031",
+          "intento": 1,
+          "archivo": "AT-0029_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 5180591,
+          "peso_mb": 4.94,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0030",
+      "fecha": "2026-09-17",
+      "hora": "15:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0020",
+      "lesion_id": "PAC-0020-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Nódulo con costra que duele al tocarlo",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "SCC",
+        "nombre": "Carcinoma epidermoide",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0032",
+          "intento": 1,
+          "archivo": "AT-0030_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 568155,
+          "peso_mb": 0.54,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Calidad: borrosa",
+          "casos_prueba": [
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada en el Sprint 1 (sin control de calidad)",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Foto movida: la lesión no está enfocada. El contrato del Sprint 1 no la rechaza; debe rechazarse o advertirse cuando se implementen HU09 (control de calidad) y HU12 (baja confianza)"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0031",
+      "fecha": "2026-09-19",
+      "hora": "08:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-05",
+      "paciente_id": "PAC-0004",
+      "lesion_id": "PAC-0004-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de lunar",
+      "localizacion_lesion": "Espalda",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.5",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0033",
+          "intento": 1,
+          "archivo": "AT-0031_1.png",
+          "formato": "PNG",
+          "peso_bytes": 5236692,
+          "peso_mb": 4.99,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0032",
+      "fecha": "2026-09-19",
+      "hora": "17:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0015",
+      "lesion_id": "PAC-0015-L2",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Lesión perlada que no cicatriza",
+      "localizacion_lesion": "Cuello",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0034",
+          "intento": 1,
+          "archivo": "AT-0032_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 5194327,
+          "peso_mb": 4.95,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0033",
+      "fecha": "2026-09-21",
+      "hora": "12:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0002",
+      "lesion_id": "PAC-0002-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0035",
+          "intento": 1,
+          "archivo": "AT-0033_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4562907,
+          "peso_mb": 4.35,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0034",
+      "fecha": "2026-09-21",
+      "hora": "14:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0013",
+      "lesion_id": "PAC-0013-L2",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión perlada que no cicatriza",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.6",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0036",
+          "intento": 1,
+          "archivo": "AT-0034_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2299610,
+          "peso_mb": 2.19,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0035",
+      "fecha": "2026-09-21",
+      "hora": "16:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0029",
+      "lesion_id": "PAC-0029-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Nódulo con costra que duele al tocarlo",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "SCC",
+        "nombre": "Carcinoma epidermoide",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0037",
+          "intento": 1,
+          "archivo": "AT-0035_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2676066,
+          "peso_mb": 2.55,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Calidad: no corresponde a una lesión",
+          "casos_prueba": [
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada en el Sprint 1 (sin control de calidad)",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Foto del rostro completo a distancia; la lesión ocupa menos del 5 % de la imagen. El contrato del Sprint 1 no la rechaza; debe rechazarse o advertirse cuando se implementen HU09 (control de calidad) y HU12 (baja confianza)"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0036",
+      "fecha": "2026-09-22",
+      "hora": "09:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0006",
+      "lesion_id": "PAC-0006-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.2",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0038",
+          "intento": 1,
+          "archivo": "AT-0036_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2594837,
+          "peso_mb": 2.47,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0037",
+      "fecha": "2026-09-22",
+      "hora": "15:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0031",
+      "lesion_id": "PAC-0031-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión rugosa que reaparece",
+      "localizacion_lesion": "Dorso de la mano",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0039",
+          "intento": 1,
+          "archivo": "AT-0037_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 6413962,
+          "peso_mb": 6.12,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0038",
+      "fecha": "2026-09-23",
+      "hora": "12:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0026",
+      "lesion_id": "PAC-0026-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Mancha áspera y escamosa en zona expuesta al sol",
+      "localizacion_lesion": "Dorso de la mano",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0040",
+          "intento": 1,
+          "archivo": "AT-0038_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3619832,
+          "peso_mb": 3.45,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0039",
+      "fecha": "2026-09-23",
+      "hora": "17:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0038",
+      "lesion_id": "PAC-0038-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.2",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0041",
+          "intento": 1,
+          "archivo": "AT-0039_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 942840,
+          "peso_mb": 0.9,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0040",
+      "fecha": "2026-09-24",
+      "hora": "08:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0021",
+      "lesion_id": "PAC-0021-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0042",
+          "intento": 1,
+          "archivo": "AT-0040_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 10485760,
+          "peso_mb": 10.0,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida en el límite",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Límite: exactamente 10 MB (10 485 760 bytes); debe aceptarse"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0041",
+      "fecha": "2026-09-24",
+      "hora": "08:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0035",
+      "lesion_id": "PAC-0035-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Costra en zona expuesta al sol que no desaparece",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0043",
+          "intento": 1,
+          "archivo": "AT-0041_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4137747,
+          "peso_mb": 3.95,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0042",
+      "fecha": "2026-09-24",
+      "hora": "12:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0032",
+      "lesion_id": "PAC-0032-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lunar que preocupa al paciente",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0044",
+          "intento": 1,
+          "archivo": "AT-0042_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 337698,
+          "peso_mb": 0.32,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0043",
+      "fecha": "2026-09-24",
+      "hora": "16:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0040",
+      "lesion_id": "PAC-0040-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0045",
+          "intento": 1,
+          "archivo": "AT-0043_1.heic",
+          "formato": "HEIC",
+          "peso_bytes": 3040870,
+          "peso_mb": 2.9,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Inválida: formato",
+          "casos_prueba": [
+            "CP02"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "Formato no admitido: use JPG o PNG"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Formato por defecto de la cámara de algunos celulares"
+        },
+        {
+          "solicitud_id": "EV-0046",
+          "intento": 2,
+          "archivo": "AT-0043_2.jpg",
+          "formato": "JPG",
+          "peso_bytes": 752375,
+          "peso_mb": 0.72,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Reintento válido",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "El médico vuelve a tomar la foto en la misma atención"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0044",
+      "fecha": "2026-09-25",
+      "hora": "10:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0043",
+      "lesion_id": "PAC-0043-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.6",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0047",
+          "intento": 1,
+          "archivo": "AT-0044_1.webp",
+          "formato": "WEBP",
+          "peso_bytes": 419430,
+          "peso_mb": 0.4,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Inválida: formato",
+          "casos_prueba": [
+            "CP02"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "Formato no admitido: use JPG o PNG"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Imagen descargada de una aplicación de mensajería"
+        },
+        {
+          "solicitud_id": "EV-0048",
+          "intento": 2,
+          "archivo": "AT-0044_2.jpg",
+          "formato": "JPG",
+          "peso_bytes": 439575,
+          "peso_mb": 0.42,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Reintento válido",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "El médico vuelve a tomar la foto en la misma atención"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0045",
+      "fecha": "2026-09-25",
+      "hora": "11:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0011",
+      "lesion_id": "PAC-0011-L2",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Mancha oscura que parece pegada a la piel",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0049",
+          "intento": 1,
+          "archivo": "AT-0045_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4116432,
+          "peso_mb": 3.93,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0046",
+      "fecha": "2026-09-28",
+      "hora": "12:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0035",
+      "lesion_id": "PAC-0035-L2",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0050",
+          "intento": 1,
+          "archivo": "AT-0046_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3328317,
+          "peso_mb": 3.17,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0047",
+      "fecha": "2026-09-28",
+      "hora": "16:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0047",
+      "lesion_id": "PAC-0047-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0051",
+          "intento": 1,
+          "archivo": "AT-0047_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4719366,
+          "peso_mb": 4.5,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0048",
+      "fecha": "2026-09-29",
+      "hora": "12:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0019",
+      "lesion_id": "PAC-0019-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Costra en zona expuesta al sol que no desaparece",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0052",
+          "intento": 1,
+          "archivo": "AT-0048_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4655410,
+          "peso_mb": 4.44,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0049",
+      "fecha": "2026-09-30",
+      "hora": "17:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0013",
+      "lesion_id": "PAC-0013-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión marrón de aspecto verrugoso",
+      "localizacion_lesion": "Cuello",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0053",
+          "intento": 1,
+          "archivo": "AT-0049_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 561719,
+          "peso_mb": 0.54,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0050",
+      "fecha": "2026-09-30",
+      "hora": "17:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0015",
+      "lesion_id": "PAC-0015-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Cuello",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0054",
+          "intento": 1,
+          "archivo": "AT-0050_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 12582912,
+          "peso_mb": 12.0,
+          "ancho_px": 6000,
+          "alto_px": 8000,
+          "tipo_caso": "Inválida: tamaño",
+          "casos_prueba": [
+            "CP03"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "El archivo supera el tamaño máximo de 10 MB"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Foto de 48 MP sin compresión"
+        },
+        {
+          "solicitud_id": "EV-0055",
+          "intento": 2,
+          "archivo": "AT-0050_2.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4309063,
+          "peso_mb": 4.11,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Reintento válido",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "El médico vuelve a tomar la foto en la misma atención"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0051",
+      "fecha": "2026-09-30",
+      "hora": "18:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0024",
+      "lesion_id": "PAC-0024-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lunar de bordes irregulares que crece",
+      "localizacion_lesion": "Pierna",
+      "referencia": {
+        "clase": "MEL",
+        "nombre": "Melanoma",
+        "grupo": "Cáncer",
+        "cie10": "C43.7",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0056",
+          "intento": 1,
+          "archivo": "AT-0051_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2904742,
+          "peso_mb": 2.77,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0052",
+      "fecha": "2026-10-01",
+      "hora": "18:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0005",
+      "lesion_id": "PAC-0005-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Espalda",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.5",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0057",
+          "intento": 1,
+          "archivo": "AT-0052_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2457394,
+          "peso_mb": 2.34,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0053",
+      "fecha": "2026-10-01",
+      "hora": "18:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0001",
+      "lesion_id": "PAC-0001-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.6",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0058",
+          "intento": 1,
+          "archivo": "AT-0053_1.png",
+          "formato": "PNG",
+          "peso_bytes": 457669,
+          "peso_mb": 0.44,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0054",
+      "fecha": "2026-10-01",
+      "hora": "18:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0025",
+      "lesion_id": "PAC-0025-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Herida que no cierra desde hace meses",
+      "localizacion_lesion": "Oreja",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.2",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0059",
+          "intento": 1,
+          "archivo": "AT-0054_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 6140438,
+          "peso_mb": 5.86,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0055",
+      "fecha": "2026-10-02",
+      "hora": "13:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0050",
+      "lesion_id": "PAC-0050-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0060",
+          "intento": 1,
+          "archivo": "AT-0055_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 62914,
+          "peso_mb": 0.06,
+          "ancho_px": 640,
+          "alto_px": 213,
+          "tipo_caso": "Inválida: resolución",
+          "casos_prueba": [
+            "CP04"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "Resolución insuficiente: el lado menor debe medir al menos 224 px"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Recorte muy angosto de la lesión"
+        }
+      ],
+      "observacion_po": "El médico no reintenta: el paciente se retira sin evaluación preliminar (la atención continúa con el flujo habitual)"
+    },
+    {
+      "atencion_id": "AT-0056",
+      "fecha": "2026-10-03",
+      "hora": "12:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-05",
+      "paciente_id": "PAC-0010",
+      "lesion_id": "PAC-0010-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Dorso de la mano",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0061",
+          "intento": 1,
+          "archivo": "AT-0056_1.png",
+          "formato": "PNG",
+          "peso_bytes": 125829,
+          "peso_mb": 0.12,
+          "ancho_px": 224,
+          "alto_px": 300,
+          "tipo_caso": "Válida en el límite",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Límite: lado menor exactamente de 224 px; debe aceptarse"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0057",
+      "fecha": "2026-10-05",
+      "hora": "14:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0016",
+      "lesion_id": "PAC-0016-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Mancha oscura que parece pegada a la piel",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0062",
+          "intento": 1,
+          "archivo": "AT-0057_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 5772595,
+          "peso_mb": 5.51,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0058",
+      "fecha": "2026-10-06",
+      "hora": "09:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0039",
+      "lesion_id": "PAC-0039-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Tórax",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.5",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0063",
+          "intento": 1,
+          "archivo": "AT-0058_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4984275,
+          "peso_mb": 4.75,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0059",
+      "fecha": "2026-10-07",
+      "hora": "10:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0045",
+      "lesion_id": "PAC-0045-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lunar que preocupa al paciente",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0064",
+          "intento": 1,
+          "archivo": "AT-0059_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2721533,
+          "peso_mb": 2.6,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0060",
+      "fecha": "2026-10-07",
+      "hora": "15:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0041",
+      "lesion_id": "PAC-0041-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lunar que roza con la ropa",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0065",
+          "intento": 1,
+          "archivo": "AT-0060_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2668101,
+          "peso_mb": 2.54,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0061",
+      "fecha": "2026-10-09",
+      "hora": "10:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0048",
+      "lesion_id": "PAC-0048-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "SCC",
+        "nombre": "Carcinoma epidermoide",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0066",
+          "intento": 1,
+          "archivo": "AT-0061_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4547973,
+          "peso_mb": 4.34,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0062",
+      "fecha": "2026-10-09",
+      "hora": "11:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0027",
+      "lesion_id": "PAC-0027-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Lesión que sangra con facilidad",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0067",
+          "intento": 1,
+          "archivo": "AT-0062_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4129362,
+          "peso_mb": 3.94,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0063",
+      "fecha": "2026-10-09",
+      "hora": "12:40",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0014",
+      "lesion_id": "PAC-0014-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Mancha oscura que parece pegada a la piel",
+      "localizacion_lesion": "Tórax",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0068",
+          "intento": 1,
+          "archivo": "AT-0063_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 31457,
+          "peso_mb": 0.03,
+          "ancho_px": 320,
+          "alto_px": 180,
+          "tipo_caso": "Inválida: resolución",
+          "casos_prueba": [
+            "CP04"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "Resolución insuficiente: el lado menor debe medir al menos 224 px"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Vista previa de una aplicación de mensajería"
+        },
+        {
+          "solicitud_id": "EV-0069",
+          "intento": 2,
+          "archivo": "AT-0063_2.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4038691,
+          "peso_mb": 3.85,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Reintento válido",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "El médico vuelve a tomar la foto en la misma atención"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0064",
+      "fecha": "2026-10-09",
+      "hora": "15:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0008",
+      "lesion_id": "PAC-0008-L1",
+      "tipo_atencion": "Primera evaluación",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Costra en zona expuesta al sol que no desaparece",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0070",
+          "intento": 1,
+          "archivo": "AT-0064_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4689480,
+          "peso_mb": 4.47,
+          "ancho_px": 3000,
+          "alto_px": 4000,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0065",
+      "fecha": "2026-10-12",
+      "hora": "16:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0040",
+      "lesion_id": "PAC-0040-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0071",
+          "intento": 1,
+          "archivo": "AT-0065_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3824444,
+          "peso_mb": 3.65,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0066",
+      "fecha": "2026-10-15",
+      "hora": "15:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0049",
+      "lesion_id": "PAC-0049-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0072",
+          "intento": 1,
+          "archivo": "AT-0066_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4085404,
+          "peso_mb": 3.9,
+          "ancho_px": 1536,
+          "alto_px": 2048,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0067",
+      "fecha": "2026-10-16",
+      "hora": "17:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0035",
+      "lesion_id": "PAC-0035-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0073",
+          "intento": 1,
+          "archivo": "AT-0067_1.gif",
+          "formato": "GIF",
+          "peso_bytes": 1887436,
+          "peso_mb": 1.8,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Inválida: formato",
+          "casos_prueba": [
+            "CP02"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "Formato no admitido: use JPG o PNG"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Archivo reenviado como GIF desde una aplicación de mensajería"
+        },
+        {
+          "solicitud_id": "EV-0074",
+          "intento": 2,
+          "archivo": "AT-0067_2.jpg",
+          "formato": "JPG",
+          "peso_bytes": 1566867,
+          "peso_mb": 1.49,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Reintento válido",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "El médico vuelve a tomar la foto en la misma atención"
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0068",
+      "fecha": "2026-10-17",
+      "hora": "09:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0046",
+      "lesion_id": "PAC-0046-L2",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0075",
+          "intento": 1,
+          "archivo": "AT-0068_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 854032,
+          "peso_mb": 0.81,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0069",
+      "fecha": "2026-10-17",
+      "hora": "11:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0024",
+      "lesion_id": "PAC-0024-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Pierna",
+      "referencia": {
+        "clase": "MEL",
+        "nombre": "Melanoma",
+        "grupo": "Cáncer",
+        "cie10": "C43.7",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0076",
+          "intento": 1,
+          "archivo": "AT-0069_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3527563,
+          "peso_mb": 3.36,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0070",
+      "fecha": "2026-10-19",
+      "hora": "08:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0026",
+      "lesion_id": "PAC-0026-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Dorso de la mano",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0077",
+          "intento": 1,
+          "archivo": "AT-0070_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 3732789,
+          "peso_mb": 3.56,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0071",
+      "fecha": "2026-10-20",
+      "hora": "11:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0016",
+      "lesion_id": "PAC-0016-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "No asegurado (pago por consulta)",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0078",
+          "intento": 1,
+          "archivo": "AT-0071_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 520902,
+          "peso_mb": 0.5,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0072",
+      "fecha": "2026-10-20",
+      "hora": "18:40",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0019",
+      "lesion_id": "PAC-0019-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0079",
+          "intento": 1,
+          "archivo": "AT-0072_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4377856,
+          "peso_mb": 4.18,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0073",
+      "fecha": "2026-10-21",
+      "hora": "10:00",
+      "turno": "Mañana",
+      "profesional_id": "PS-01",
+      "paciente_id": "PAC-0013",
+      "lesion_id": "PAC-0013-L2",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Antebrazo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.6",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0080",
+          "intento": 1,
+          "archivo": "AT-0073_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2399178,
+          "peso_mb": 2.29,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0074",
+      "fecha": "2026-10-21",
+      "hora": "10:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0004",
+      "lesion_id": "PAC-0004-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Espalda",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.5",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0081",
+          "intento": 1,
+          "archivo": "AT-0074_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2639660,
+          "peso_mb": 2.52,
+          "ancho_px": 3456,
+          "alto_px": 4608,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0075",
+      "fecha": "2026-10-21",
+      "hora": "18:00",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0021",
+      "lesion_id": "PAC-0021-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Cuero cabelludo",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.4",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0082",
+          "intento": 1,
+          "archivo": "AT-0075_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 444743,
+          "peso_mb": 0.42,
+          "ancho_px": 1080,
+          "alto_px": 1440,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0076",
+      "fecha": "2026-10-22",
+      "hora": "14:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-03",
+      "paciente_id": "PAC-0032",
+      "lesion_id": "PAC-0032-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "NEV",
+        "nombre": "Nevo melanocítico",
+        "grupo": "No cáncer",
+        "cie10": "D22.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0083",
+          "intento": 1,
+          "archivo": "AT-0076_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 4349093,
+          "peso_mb": 4.15,
+          "ancho_px": 3024,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0077",
+      "fecha": "2026-10-23",
+      "hora": "17:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0011",
+      "lesion_id": "PAC-0011-L2",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Rostro",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0084",
+          "intento": 1,
+          "archivo": "AT-0077_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 1372837,
+          "peso_mb": 1.31,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0078",
+      "fecha": "2026-10-24",
+      "hora": "12:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-05",
+      "paciente_id": "PAC-0013",
+      "lesion_id": "PAC-0013-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Cuello",
+      "referencia": {
+        "clase": "SEK",
+        "nombre": "Queratosis seborreica",
+        "grupo": "No cáncer",
+        "cie10": "L82",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0085",
+          "intento": 1,
+          "archivo": "AT-0078_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2289114,
+          "peso_mb": 2.18,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    },
+    {
+      "atencion_id": "AT-0079",
+      "fecha": "2026-10-27",
+      "hora": "16:20",
+      "turno": "Tarde",
+      "profesional_id": "PS-04",
+      "paciente_id": "PAC-0031",
+      "lesion_id": "PAC-0031-L1",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Dorso de la mano",
+      "referencia": {
+        "clase": "ACK",
+        "nombre": "Queratosis actínica",
+        "grupo": "No cáncer (lesión precancerosa)",
+        "cie10": "L57.0",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0086",
+          "intento": 1,
+          "archivo": "AT-0079_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 734003,
+          "peso_mb": 0.7,
+          "ancho_px": null,
+          "alto_px": null,
+          "tipo_caso": "Inválida: dañada",
+          "casos_prueba": [
+            "CP10 (propuesto: imagen dañada)"
+          ],
+          "estado_esperado": "Rechazada",
+          "resultado_esperado": {
+            "http": 422,
+            "detail": "La imagen está dañada o no se puede leer"
+          },
+          "resultado_obtenido": null,
+          "observacion_po": "Transferencia interrumpida: el archivo está truncado"
+        }
+      ],
+      "observacion_po": "El médico no reintenta: el paciente se retira sin evaluación preliminar (la atención continúa con el flujo habitual)"
+    },
+    {
+      "atencion_id": "AT-0080",
+      "fecha": "2026-10-28",
+      "hora": "07:20",
+      "turno": "Mañana",
+      "profesional_id": "PS-02",
+      "paciente_id": "PAC-0035",
+      "lesion_id": "PAC-0035-L2",
+      "tipo_atencion": "Control",
+      "servicio": "Consulta externa – Medicina general",
+      "financiamiento": "SIS",
+      "motivo_consulta": "Control de la lesión evaluada previamente",
+      "localizacion_lesion": "Nariz",
+      "referencia": {
+        "clase": "BCC",
+        "nombre": "Carcinoma basocelular",
+        "grupo": "Cáncer",
+        "cie10": "C44.3",
+        "nota": "Etiqueta de la imagen fuente (PAD-UFES-20, conjunto de prueba); no es el diagnóstico del médico"
+      },
+      "fotos": [
+        {
+          "solicitud_id": "EV-0087",
+          "intento": 1,
+          "archivo": "AT-0080_1.jpg",
+          "formato": "JPG",
+          "peso_bytes": 2430114,
+          "peso_mb": 2.32,
+          "ancho_px": 2268,
+          "alto_px": 4032,
+          "tipo_caso": "Válida",
+          "casos_prueba": [
+            "CP01",
+            "CP08",
+            "CP09"
+          ],
+          "estado_esperado": "Aceptada",
+          "resultado_esperado": {
+            "http": 200,
+            "verificar": [
+              "HTTP 200",
+              "categoria ∈ {ACK, BCC, MEL, NEV, SCC, SEK}",
+              "0 ≤ confianza ≤ 1",
+              "seis probabilidades que suman 1 (±0.001)",
+              "version_modelo presente",
+              "tiempo_procesamiento_ms presente"
+            ]
+          },
+          "resultado_obtenido": null
+        }
+      ]
+    }
+  ]
+}

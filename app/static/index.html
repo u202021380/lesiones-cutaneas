@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluación preliminar de lesiones cutáneas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="barra">
+    <h1>Evaluación preliminar de lesiones cutáneas</h1>
+    <p class="sub">Apoyo a la evaluación inicial en consulta externa</p>
+  </header>
+
+  <main>
+    <div id="banner-simulado" class="banner" hidden>
+      Modo de prueba: el modelo es simulado y los resultados no son clasificaciones reales.
+    </div>
+
+    <!-- HU11: guía para tomar la fotografía -->
+    <section id="guia" class="tarjeta">
+      <div class="guia-cab">
+        <h2>Cómo tomar la foto</h2>
+        <button id="ocultar-guia" class="enlace" type="button">Ocultar guía</button>
+      </div>
+      <div class="guia-cuerpo">
+        <svg class="ejemplo" viewBox="0 0 120 160" role="img" aria-label="Ejemplo de encuadre: la lesión centrada y ocupando gran parte de la foto">
+          <rect x="4" y="4" width="112" height="152" rx="12" fill="none" stroke="currentColor" stroke-width="3"/>
+          <rect x="16" y="20" width="88" height="112" rx="4" fill="#f3e3d7"/>
+          <ellipse cx="60" cy="76" rx="20" ry="16" fill="#8a5a44"/>
+          <path d="M28 40h12M28 40v12M92 40h-12M92 40v12M28 112h12M28 112v-12M92 112h-12M92 112v-12" stroke="#1f6feb" stroke-width="3" fill="none"/>
+          <circle cx="60" cy="146" r="4" fill="currentColor"/>
+        </svg>
+        <ol class="indicaciones">
+          <li><strong>Distancia:</strong> a unos 10–15 cm, con la lesión centrada y ocupando buena parte de la imagen.</li>
+          <li><strong>Iluminación:</strong> luz natural o del consultorio, sin flash directo ni sombras sobre la lesión.</li>
+          <li><strong>Enfoque:</strong> toque la lesión en la pantalla para enfocar y mantenga el celular quieto.</li>
+          <li><strong>Una lesión por foto:</strong> si hay varias, tome una foto de cada una.</li>
+        </ol>
+      </div>
+    </section>
+    <button id="mostrar-guia" class="enlace" type="button" hidden>Ver guía para tomar la foto</button>
+
+    <!-- HU01: carga de la fotografía -->
+    <section class="tarjeta">
+      <h2>1. Foto de la lesión</h2>
+      <label class="selector">
+        <input id="archivo" type="file" accept="image/jpeg,image/png" capture="environment">
+        <span>Tomar o seleccionar foto (JPG o PNG, hasta 10 MB)</span>
+      </label>
+      <p id="error" class="error" role="alert" hidden></p>
+      <img id="vista-previa" class="vista" alt="Vista previa de la foto" hidden>
+      <button id="evaluar" class="primario" type="button" disabled>2. Evaluar</button>
+    </section>
+
+    <!-- HU03, HU04, HU12: resultado -->
+    <section id="resultado" class="tarjeta" hidden aria-live="polite">
+      <h2>3. Resultado preliminar</h2>
+      <div id="advertencia" class="advertencia" hidden></div>
+      <p class="categoria"><span id="categoria"></span> <span id="grupo" class="etiqueta"></span></p>
+      <p>Confianza: <strong id="confianza"></strong></p>
+      <div id="probabilidades" class="barras"></div>
+      <div class="mapa">
+        <div class="mapa-cab">
+          <h3>Regiones que influyeron en el resultado (Grad-CAM)</h3>
+          <button id="alternar-mapa" class="enlace" type="button">Ver foto original</button>
+        </div>
+        <img id="mapa" class="vista" alt="Mapa de calor Grad-CAM sobre la foto">
+      </div>
+      <p class="aviso" id="aviso"></p>
+      <p class="meta" id="meta"></p>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
