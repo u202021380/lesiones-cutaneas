@@ -1,0 +1,18 @@
+{
+  "clases": [
+    "ACK",
+    "BCC",
+    "MEL",
+    "NEV",
+    "SCC",
+    "SEK"
+  ],
+  "arquitectura": "MobileNetV2",
+  "capa_gradcam": "out_relu",
+  "version": "mobilenetv2-20261112",
+  "umbral_confianza_sugerido": null,
+  "tensorflow": "2.21.0",
+  "keras": "3.13.2",
+  "exactitud_prueba": 0.6011,
+  "auc_roc_prueba": 0.8558
+}
